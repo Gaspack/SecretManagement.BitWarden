@@ -63,8 +63,7 @@ function Invoke-bwcmd {
                     '*session*' {
                         Write-Verbose "Wrong Password, Try again $PSBoundParameters"
                         invoke-bwcmd $PSBoundParameters.Item('Arguments') -loginrequired $true
-                        #  Write-Verbose "Please Unlock Account"
-                        #  Unlock-BWSession -Credentials 'gaston.paquette@epicgui.dev'
+
                     }
                     'You are not logged in.' {
                         invoke-bwcmd $PSBoundParameters.Item('Arguments') -loginrequired $true
