@@ -15,6 +15,36 @@ Download and Install
 * The [`bitwarden-cli`](https://bitwarden.com/help/article/cli/#download-and-install)
 * The [SecretManagement](https://github.com/PowerShell/SecretManagement) PowerShell module
 
+You can get the `SecretManagement` module from the PowerShell Gallery:
+
+Using PowerShellGet v2:
+
+```pwsh
+Install-Module Microsoft.PowerShell.SecretManagement -AllowPrerelease
+```
+
+Using PowerShellGet v3:
+
+```pwsh
+Install-PSResource Microsoft.PowerShell.SecretManagement -Prerelease
+```
+
+## Installation
+
+You an install this module from the PowerShell Gallery:
+
+Using PowerShellGet v2:
+
+```pwsh
+Install-Module SecretManagement.BitWarden
+```
+
+Using PowerShellGet v3:
+
+```pwsh
+Install-PSResource SecretManagement.BitWarden
+```
+
 ## Registration
 
 Once you have it installed,
