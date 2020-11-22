@@ -160,19 +160,42 @@ function Get-Secret {
     return $Output
 }
 
+<#
+.SYNOPSIS
+Create a BitWarden Secret Template Object
+.DESCRIPTION
+Create a BitWarden Secret Template Object
+.PARAMETER Vault
+Name of the vault to connect to.
+.PARAMETER User
+Username to connect with.
+.PARAMETER Trust
+Cause subsquent logins to not require multifactor authentication.
+.PARAMETER StayConnected
+Save the LastPass decryption key on the hard drive so re-entering password once the connection window close is not required anymore. 
+This operation will prompt the user.
+.PARAMETER Force
+Force switch.
+.EXAMPLE
+PS> Get-SecretTemplate -url 'https://github.com/' -Note "Version control using Git" -Type 'Login' | Set-Secret
+Create login templated secret and create secret in BitWarden.  This will automatically prompt to set credentials
+PS> Get-SecretTemplate -url 'https://github.com/' -Note "Version control using Git" -Type 'SecureNote' | Set-Secret
+Create SecureNote templated secret and create secret in BitWarden.
+#>
 Function Get-SecretTemplate {
     [CmdletBinding()]
     param (
         [parameter(Mandatory = $true)]
-        $Name, 
-        $Note, 
-        $url, 
+        [string]$Name, 
+        [parameter(Mandatory = $true)]
         [ValidateSet("SecureNote", "Login")]
-        $Type
-    )
+        [string]$Type,
+        [string]$Note, 
+        [string]$url
+)
 
     Switch ($type) {
-        'login' {
+        'Login' {
             $credential = Get-Credential
             $username = $Credential.UserName
             $password = $Credential.GetNetworkCredential().Password
