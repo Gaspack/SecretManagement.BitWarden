@@ -124,7 +124,7 @@ function Get-Secret {
         [hashtable] $AdditionalParameters
     )
 
-    $res = Invoke-bwcmd "get item $Name"
+    $res = Invoke-bwcmd "get item '$Name'"
 
 
     Switch ($AdditionalParameters.outputType ) {
