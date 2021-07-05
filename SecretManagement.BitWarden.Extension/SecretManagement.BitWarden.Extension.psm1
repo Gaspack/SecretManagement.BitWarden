@@ -20,7 +20,7 @@ function Invoke-bwcmd {
             switch ($status.status) {
                 'unauthenticated' {
                     Write-Verbose "New login"
-                    $credential = Get-Credential
+                    $credential = Get-Credential -Message $("Bitwarden credential for Server: {0}" -f $status.serverUrl) 
                     $username = $Credential.UserName
                     $password = $Credential.GetNetworkCredential().Password
                     $codetype = Read-Host -Prompt 'Two Step Login Methods - Please enter numeric value 0) Authenticator 1) Email 3) Yubikey'
@@ -29,7 +29,7 @@ function Invoke-bwcmd {
                 }
                 'locked' {
                     Write-Verbose "Unlocking"
-                    $credential = Get-Credential $status.userEmail
+                    $credential = Get-Credential -UserName $status.userEmail -Message $("Bitwarden credential for Server: {0}" -f $status.serverUrl)
                     $password = $Credential.GetNetworkCredential().Password
                     $env:BW_Session = invoke-bwcmd "unlock ""$password"" --raw"
                     Start-Sleep 1
